@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FDF8F0;
+  --color-ivory-dark: #F5EDE0;
+  --color-maroon: #7B1F3A;
+  --color-maroon-light: #9B2D4E;
+  --color-maroon-dark: #5C1629;
+  --color-gold: #C9A84C;
+  --color-gold-light: #D4BA6A;
+  --color-gold-dark: #A88A3A;
+  --color-charcoal: #2D2D2D;
+  --color-charcoal-light: #4A4A4A;
+  --font-family-body: 'Mukta', sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Mukta', sans-serif;
+  color: #2D2D2D;
+  background-color: #FDF8F0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FDF8F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A84C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A88A3A;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+
+/* Lightbox styles */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gold ornamental divider */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '';
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(to right, transparent, #C9A84C);
+}
+
+.ornamental-divider::after {
+  background: linear-gradient(to left, transparent, #C9A84C);
+}
+
+/* Image gallery masonry */
+.masonry-grid {
+  columns: 1;
+  column-gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    columns: 3;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
