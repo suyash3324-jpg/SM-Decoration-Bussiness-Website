@@ -49,15 +49,17 @@ export default function ContactPage() {
                   <Phone size={16} />
                   कॉल करा
                 </a>
-                <a
-                  href={businessInfo.getWhatsAppUrl(owner.phone)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-all hover:shadow-md text-sm"
-                >
-                  <MessageCircle size={16} />
-                  WhatsApp वर संपर्क करा
-                </a>
+                {owner.whatsapp && (
+                  <a
+                    href={businessInfo.getWhatsAppUrl(owner.whatsapp)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-all hover:shadow-md text-sm"
+                  >
+                    <MessageCircle size={16} />
+                    WhatsApp वर संपर्क करा
+                  </a>
+                )}
               </div>
             </div>
           ))}

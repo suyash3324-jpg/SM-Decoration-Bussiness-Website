@@ -82,7 +82,7 @@ export default function CategoryGalleryPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
-              href={`https://wa.me/91${businessInfo.owners[0].phone}?text=${encodeURIComponent(`नमस्कार! मला SM Mandap Decoration च्या "${category.name}" बद्दल अधिक माहिती आणि दर जाणून घ्यायचे आहेत.`)}`}
+              href={`https://wa.me/91${businessInfo.primaryWhatsApp}?text=${encodeURIComponent(`नमस्कार! मला SM Mandap Decoration च्या "${category.name}" बद्दल अधिक माहिती आणि दर जाणून घ्यायचे आहेत.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg w-full sm:w-auto justify-center"
