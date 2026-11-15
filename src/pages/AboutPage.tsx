@@ -64,7 +64,7 @@ export default function AboutPage() {
                 <ArrowRight size={18} />
               </Link>
               <a
-                href={businessInfo.getWhatsAppUrl(businessInfo.owners[0].phone)}
+                href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsAppNumber)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all hover:shadow-lg"
@@ -136,15 +136,17 @@ export default function AboutPage() {
                     <Phone size={13} />
                     <span>कॉल</span>
                   </a>
-                  <a
-                    href={businessInfo.getWhatsAppUrl(owner.phone)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-medium transition-colors"
-                  >
-                    <MessageCircle size={13} />
-                    <span>WhatsApp</span>
-                  </a>
+                  {owner.whatsapp && (
+                    <a
+                      href={businessInfo.getWhatsAppUrl(owner.whatsapp)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-medium transition-colors"
+                    >
+                      <MessageCircle size={13} />
+                      <span>WhatsApp</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

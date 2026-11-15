@@ -47,7 +47,7 @@ function HeroSection() {
               <ArrowRight size={18} />
             </Link>
             <a
-              href={businessInfo.getWhatsAppUrl(businessInfo.owners[0].phone)}
+              href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsAppNumber)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold text-base transition-all hover:shadow-lg hover:shadow-green-600/20"
@@ -314,7 +314,7 @@ function ContactCTA() {
           तुमच्या खास प्रसंगासाठी सजावटीची चर्चा करण्यासाठी आजच आमच्याशी संपर्क साधा.
         </p>
         <a
-          href={businessInfo.getWhatsAppUrl(businessInfo.owners[0].phone)}
+          href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsAppNumber)}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-xl hover:shadow-green-600/30 hover:scale-105"

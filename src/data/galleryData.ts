@@ -7,6 +7,11 @@ export interface Category {
   images: string[];
 }
 
+export interface FolderBatch {
+  folder: string;
+  filenames: string[];
+}
+
 const encodeImagePath = (folder: string, filename: string): string => {
   return `/images/${encodeURIComponent(folder)}/${encodeURIComponent(filename)}`;
 };
@@ -17,16 +22,26 @@ const buildCategory = (
   slug: string,
   description: string,
   icon: string,
-  folder: string,
-  filenames: string[]
-): Category => ({
-  id,
-  name,
-  slug,
-  description,
-  icon,
-  images: filenames.map((f) => encodeImagePath(folder, f)),
-});
+  folderOrBatches: string | FolderBatch[],
+  filenames?: string[]
+): Category => {
+  let images: string[] = [];
+  if (Array.isArray(folderOrBatches)) {
+    images = folderOrBatches.flatMap((batch) =>
+      batch.filenames.map((f) => encodeImagePath(batch.folder, f))
+    );
+  } else {
+    images = (filenames || []).map((f) => encodeImagePath(folderOrBatches, f));
+  }
+  return {
+    id,
+    name,
+    slug,
+    description,
+    icon,
+    images,
+  };
+};
 
 export const categories: Category[] = [
   buildCategory(
@@ -117,16 +132,48 @@ export const categories: Category[] = [
     'dohale-jevan',
     'डोहाळे जेवण समारंभासाठी सुंदर आणि पारंपरिक सजावट.',
     'baby',
-    'डोहाळे जेवण सजावट',
     [
-      'WhatsApp Image 2026-11-14 at 3.12.06 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.07 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.07 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.08 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.08 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.09 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.09 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.12.09 PM.jpeg',
+      {
+        folder: 'डोहाळे जेवण सजावट',
+        filenames: [
+          'WhatsApp Image 2026-11-14 at 3.12.06 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.07 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.07 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.08 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.08 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.09 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.09 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.12.09 PM.jpeg',
+        ],
+      },
+      {
+        folder: 'डोहाळे जेवणाचे जास्तीचे फोटो',
+        filenames: [
+          'WhatsApp Image 2026-11-15 at 10.46.22 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.22 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.22 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.23 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.23 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.23 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.23 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.24 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.24 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.24 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.24 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.25 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.25 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.25 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.26 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.26 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.26 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.26 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.27 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.27 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.27 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.27 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.46.28 AM.jpeg',
+        ],
+      },
     ]
   ),
   buildCategory(
@@ -171,18 +218,30 @@ export const categories: Category[] = [
     'gate-decoration',
     'कार्यक्रमाच्या प्रवेशद्वारासाठी भव्य आणि स्वागतशील सजावट.',
     'gate',
-    'प्रवेशद्वार सजावट',
     [
-      'WhatsApp Image 2026-11-14 at 3.22.33 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.33 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.33 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.34 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.34 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.34 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.35 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.35 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.35 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.22.35 PM.jpeg',
+      {
+        folder: 'प्रवेशद्वार सजावट',
+        filenames: [
+          'WhatsApp Image 2026-11-14 at 3.22.33 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.33 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.33 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.34 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.34 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.34 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.35 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.35 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.35 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.22.35 PM.jpeg',
+        ],
+      },
+      {
+        folder: 'प्रवेशद्वार सजावट अतिरिक्त फोटो',
+        filenames: [
+          'WhatsApp Image 2026-11-15 at 10.48.24 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.48.24 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.48.25 AM.jpeg',
+        ],
+      },
     ]
   ),
   buildCategory(
@@ -205,42 +264,82 @@ export const categories: Category[] = [
     'wedding-decoration',
     'लग्नसमारंभ आणि मंडपासाठी भव्य आणि आकर्षक सजावट.',
     'wedding',
-    'लग्नाची सजावट',
     [
-      'WhatsApp Image 2026-11-14 at 2.57.49 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.52 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.52 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.53 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.53 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.53 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.54 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.54 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.54 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.54 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.56 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.56 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.56 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.57 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.57 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.59 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.57.59 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.00 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.00 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.00 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.00 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.01 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.01 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.01 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.01 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.02 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.02 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.02 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.03 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.03 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.03 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.03 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.04 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 2.58.04 PM.jpeg',
+      {
+        folder: 'लग्नाची सजावट',
+        filenames: [
+          'WhatsApp Image 2026-11-14 at 2.57.49 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.52 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.52 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.53 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.53 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.53 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.54 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.54 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.54 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.54 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.56 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.56 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.56 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.57 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.57 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.59 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.57.59 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.00 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.00 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.00 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.00 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.01 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.01 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.01 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.01 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.02 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.02 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.02 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.03 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.03 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.03 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.03 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.04 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 2.58.04 PM.jpeg',
+        ],
+      },
+      {
+        folder: 'लग्नाच्या सजावटीचे जास्तीचे फोटो',
+        filenames: [
+          'WhatsApp Image 2026-11-15 at 10.44.34 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.34 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.35 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.35 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.35 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.35 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.36 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.36 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.36 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.36 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.37 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.37 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.37 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.38 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.38 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.38 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.38 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.39 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.39 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.39 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.40 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.40 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.40 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.40 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.41 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.41 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.41 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.41 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.42 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.42 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.44.42 AM.jpeg',
+        ],
+      },
     ]
   ),
   buildCategory(
@@ -249,20 +348,69 @@ export const categories: Category[] = [
     'birthday-decoration',
     'वाढदिवसासाठी रंगीबेरंगी आणि आनंददायी सजावट.',
     'cake',
-    'वाढदिवस सजावट',
     [
-      'WhatsApp Image 2026-11-14 at 3.26.10 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.11 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.12 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.13 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.13 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.13 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.13 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.14 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.14 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.14 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.14 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.26.15 PM.jpeg',
+      {
+        folder: 'वाढदिवस सजावट',
+        filenames: [
+          'WhatsApp Image 2026-11-14 at 3.26.10 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.11 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.12 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.13 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.13 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.13 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.13 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.14 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.14 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.14 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.14 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.26.15 PM.jpeg',
+        ],
+      },
+      {
+        folder: 'वाढदिवसाच्या अतिरिक्त प्रतिमा',
+        filenames: [
+          'WhatsApp Image 2026-11-15 at 10.40.01 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.01 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.01 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.02 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.02 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.02 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.03 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.03 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.03 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.04 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.04 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.04 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.04 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.05 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.05 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.05 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.05 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.06 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.06 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.06 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.07 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.07 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.07 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.07 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.08 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.08 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.08 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.09 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.09 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.09 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.09 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.10 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.10 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.10 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.11 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.11 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.11 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.12 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.12 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.40.12 AM.jpeg',
+        ],
+      },
     ]
   ),
   buildCategory(
@@ -271,18 +419,40 @@ export const categories: Category[] = [
     'haldi-mehendi',
     'हळदी आणि मेहंदी समारंभासाठी पारंपरिक आणि सुंदर सजावट.',
     'palette',
-    'हळदी-मेहंदी सोहळा',
     [
-      'WhatsApp Image 2026-11-14 at 3.21.13 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.13 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.13 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.14 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.14 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.14 PM (3).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.14 PM.jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.15 PM (1).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.15 PM (2).jpeg',
-      'WhatsApp Image 2026-11-14 at 3.21.15 PM.jpeg',
+      {
+        folder: 'हळदी-मेहंदी सोहळा',
+        filenames: [
+          'WhatsApp Image 2026-11-14 at 3.21.13 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.13 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.13 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.14 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.14 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.14 PM (3).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.14 PM.jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.15 PM (1).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.15 PM (2).jpeg',
+          'WhatsApp Image 2026-11-14 at 3.21.15 PM.jpeg',
+        ],
+      },
+      {
+        folder: 'हळदीचे जास्तीचे फोटो',
+        filenames: [
+          'WhatsApp Image 2026-11-15 at 10.41.13 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.13 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.13 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.14 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.14 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.14 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.15 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.15 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.15 AM (3).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.15 AM.jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.16 AM (1).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.16 AM (2).jpeg',
+          'WhatsApp Image 2026-11-15 at 10.41.16 AM.jpeg',
+        ],
+      },
     ]
   ),
   buildCategory(
@@ -310,11 +480,55 @@ export const categories: Category[] = [
       'WhatsApp Image 2026-11-14 at 3.32.53 PM.jpeg',
     ]
   ),
+  buildCategory(
+    'car',
+    'कार डेकोरेशन',
+    'car-decoration',
+    'लग्न आणि खास प्रसंगांसाठी आकर्षक आणि सुंदर कार डेकोरेशन.',
+    'car',
+    'कार डेकोरेशन फोटो',
+    [
+      'WhatsApp Image 2026-11-15 at 10.42.51 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.51 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.52 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.52 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.52 AM (3).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.52 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.53 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.53 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.53 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.54 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.54 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.54 AM (3).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.54 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.55 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.55 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.55 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.56 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.56 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.56 AM (3).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.56 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.57 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.57 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.57 AM (3).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.57 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.58 AM (1).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.58 AM (2).jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.58 AM.jpeg',
+      'WhatsApp Image 2026-11-15 at 10.42.59 AM.jpeg',
+    ]
+  ),
 ];
 
 export const getCategoryBySlug = (slug: string): Category | undefined => {
   return categories.find((cat) => cat.slug === slug);
 };
+
+export interface Owner {
+  name: string;
+  phone: string;
+  whatsapp?: string;
+}
 
 export const businessInfo = {
   name: 'SM Mandap Decoration',
@@ -323,14 +537,16 @@ export const businessInfo = {
   address: 'रेठरे हरणाक्ष, ता. वाळवा, जि. सांगली, महाराष्ट्र.',
   instagram: 'https://www.instagram.com/sm_mandap_decoration_/',
   whatsappMessage: 'नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.',
+  primaryWhatsAppNumber: '9370740095',
   owners: [
     { name: 'अशोक मोरे', phone: '9322602255' },
-    { name: 'अमित मोरे', phone: '9226183003' },
-    { name: 'अजय मोरे', phone: '9370740095' },
-  ],
-  getWhatsAppUrl: (phone: string) => {
-    const message = encodeURIComponent('नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.');
-    return `https://wa.me/91${phone}?text=${message}`;
+    { name: 'अभिजीत मोरे', phone: '9226183003', whatsapp: '7038900743' },
+    { name: 'अजय मोरे', phone: '9370740095', whatsapp: '9370740095' },
+  ] as Owner[],
+  getWhatsAppUrl: (phone?: string, customMessage?: string) => {
+    const targetNumber = phone || '9370740095';
+    const message = encodeURIComponent(customMessage || 'नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.');
+    return `https://wa.me/91${targetNumber}?text=${message}`;
   },
   getCallUrl: (phone: string) => `tel:+91${phone}`,
 };

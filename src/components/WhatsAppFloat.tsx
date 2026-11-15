@@ -62,16 +62,18 @@ export default function WhatsAppFloat() {
                   >
                     <Phone size={14} />
                   </a>
-                  <a
-                    href={businessInfo.getWhatsAppUrl(owner.phone)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-medium transition-colors"
-                    title={`${owner.name} यांना WhatsApp करा`}
-                  >
-                    <MessageCircle size={14} />
-                    <span>चॅट</span>
-                  </a>
+                  {owner.whatsapp && (
+                    <a
+                      href={businessInfo.getWhatsAppUrl(owner.whatsapp)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 px-2.5 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-medium transition-colors"
+                      title={`${owner.name} यांना WhatsApp करा`}
+                    >
+                      <MessageCircle size={14} />
+                      <span>चॅट</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
