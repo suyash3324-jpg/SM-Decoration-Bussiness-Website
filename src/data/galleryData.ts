@@ -527,7 +527,7 @@ export const getCategoryBySlug = (slug: string): Category | undefined => {
 export interface Owner {
   name: string;
   phone: string;
-  whatsapp?: string;
+  whatsapp?: string | null;
 }
 
 export const businessInfo = {
@@ -537,13 +537,16 @@ export const businessInfo = {
   address: 'रेठरे हरणाक्ष, ता. वाळवा, जि. सांगली, महाराष्ट्र.',
   instagram: 'https://www.instagram.com/sm_mandap_decoration_/',
   whatsappMessage: 'नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.',
-  primaryWhatsAppNumber: '9370740095',
+  // `phone` is used for calls; `whatsapp` is used for WhatsApp chats (null = no WhatsApp).
   owners: [
-    { name: 'अशोक मोरे', phone: '9322602255' },
+    { name: 'अशोक मोरे', phone: '9322602255', whatsapp: null },
     { name: 'अभिजीत मोरे', phone: '9226183003', whatsapp: '7038900743' },
     { name: 'अजय मोरे', phone: '9370740095', whatsapp: '9370740095' },
   ] as Owner[],
-  getWhatsAppUrl: (phone?: string, customMessage?: string) => {
+  // Main WhatsApp contact used across the site (Ajay More)
+  primaryWhatsApp: '9370740095',
+  primaryWhatsAppNumber: '9370740095',
+  getWhatsAppUrl: (phone?: string | null, customMessage?: string) => {
     const targetNumber = phone || '9370740095';
     const message = encodeURIComponent(customMessage || 'नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.');
     return `https://wa.me/91${targetNumber}?text=${message}`;

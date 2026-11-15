@@ -45,7 +45,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsAppNumber)}
+              href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsApp)}
               target="_blank"
               rel="noopener noreferrer"
               className="ml-3 inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-md hover:shadow-lg"
@@ -58,7 +58,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center gap-2">
             <a
-              href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsAppNumber)}
+              href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsApp)}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-green-600 text-white rounded-lg"
@@ -99,7 +99,7 @@ export default function Navbar() {
             {/* Mobile Contact Quick Actions */}
             <div className="pt-3 border-t border-gray-100 px-4 space-y-2">
               <a
-                href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsAppNumber)}
+                href={businessInfo.getWhatsAppUrl(businessInfo.primaryWhatsApp)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full bg-green-600 text-white py-2.5 rounded-lg text-sm font-semibold shadow-xs"

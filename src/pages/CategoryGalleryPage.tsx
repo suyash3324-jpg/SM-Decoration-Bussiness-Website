@@ -83,7 +83,7 @@ export default function CategoryGalleryPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href={businessInfo.getWhatsAppUrl(
-                businessInfo.primaryWhatsAppNumber,
+                businessInfo.primaryWhatsApp,
                 `नमस्कार! मला SM Mandap Decoration च्या "${category.name}" बद्दल अधिक माहिती आणि दर जाणून घ्यायचे आहेत.`
               )}
               target="_blank"
