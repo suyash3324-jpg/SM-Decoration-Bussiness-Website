@@ -323,11 +323,14 @@ export const businessInfo = {
   address: 'रेठरे हरणाक्ष, ता. वाळवा, जि. सांगली, महाराष्ट्र.',
   instagram: 'https://www.instagram.com/sm_mandap_decoration_/',
   whatsappMessage: 'नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.',
+  // `phone` is used for calls; `whatsapp` is used for WhatsApp chats (null = no WhatsApp).
   owners: [
-    { name: 'अशोक मोरे', phone: '9322602255' },
-    { name: 'अमित मोरे', phone: '9226183003' },
-    { name: 'अजय मोरे', phone: '9370740095' },
+    { name: 'अशोक मोरे', phone: '9322602255', whatsapp: null as string | null },
+    { name: 'अभिजीत मोरे', phone: '9226183003', whatsapp: '7038900743' as string | null },
+    { name: 'अजय मोरे', phone: '9370740095', whatsapp: '9370740095' as string | null },
   ],
+  // Main WhatsApp contact used across the site (Ajay More)
+  primaryWhatsApp: '9370740095',
   getWhatsAppUrl: (phone: string) => {
     const message = encodeURIComponent('नमस्कार! मला SM Mandap Decoration च्या सजावटीबद्दल माहिती हवी आहे.');
     return `https://wa.me/91${phone}?text=${message}`;
